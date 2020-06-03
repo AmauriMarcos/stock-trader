@@ -9,6 +9,8 @@
                  <router-link tag='a' to='/stocks' active-class="active">Stocks</router-link>            
                </ul>
             </div>
+            <!-- <p>QTD: BMW({{getQuantity.bmw}})     Google({{getQuantity.google}})
+                    Apple({{getQuantity.apple}}) Twitter({{getQuantity.twitter}})</p> -->
             <div class="header__end">
               <ul>
                  <li>End Day</li>
@@ -34,7 +36,10 @@ export default {
   computed: {
     funds(){
        return this.$store.getters.formatNumber;
-    }
+    }/* ,
+    getQuantity(){
+      return this.$store.getters.getQuantity;
+    } */
   }
 }
 </script>

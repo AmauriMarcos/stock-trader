@@ -3,44 +3,63 @@
 
      <div class="bmw box">
        <div class="bar">
-          <h3>BMW <span>(Price: {{getPrices[0].bmw}})</span></h3>
+          <h3>BMW <span>(Price: {{getPrices.bmw}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity">
-       <button>Buy</button>
+       <input type="text" placeholder="Quantity" v-model="bmw">
+       <button @click="result(bmw)">Buy</button>
      </div>
 
      <div class="google box">
        <div class="bar">
-         <h3>Google <span>(Price: {{getPrices[1].google}})</span></h3>
+         <h3>Google <span>(Price: {{getPrices.google}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity">
+       <input type="text" placeholder="Quantity" v-model="google">
        <button>Buy</button>
      </div>
 
      <div class="apple box">
        <div class="bar">
-         <h3>Apple <span>(Price: {{getPrices[2].apple}})</span></h3>
+         <h3>Apple <span>(Price: {{getPrices.apple}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity">
+       <input type="text" placeholder="Quantity" v-model="apple">
        <button>Buy</button>
      </div>
 
      <div class="twitter box">
        <div class="bar">
-         <h3>Twitter <span>(Price: {{getPrices[3].twitter}})</span></h3>
+         <h3>Twitter <span>(Price: {{getPrices.twitter}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity">
+       <input type="text" placeholder="Quantity" v-model="twitter">
        <button>Buy</button>
      </div>
   </div>
 </template>
 
 <script>
+import { mapFields } from 'vuex-map-fields';
+
 export default {
+   data(){
+     return{
+        bmw: 0
+     }
+   },
    computed: {
+     ...mapFields([
+       'quantity.bmw',
+       'quantity.google',
+       'quantity.apple',
+       'quantity.twitter'
+       
+     ]),
      getPrices(){
        return this.$store.getters.getPrices;
      }
+   },
+   methods: {
+      result(bmw){
+         
+      }
    }
 }
 </script>
