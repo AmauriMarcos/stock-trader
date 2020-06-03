@@ -4,9 +4,9 @@
         <div class="header">
             <div class="header__start">
                <ul>
-                 <li>Stock Trader</li>
-                 <li>Portfolio</li>
-                 <li>Stocks</li>
+                 <router-link tag='a' to='/' active-class="active" exact="/">Stock Trader</router-link>
+                 <router-link tag='a' to='/portfolio' active-class="active">Portfolio</router-link>
+                 <router-link tag='a' to='/stocks' active-class="active">Stocks</router-link>            
                </ul>
             </div>
             <div class="header__end">
@@ -14,7 +14,7 @@
                  <li>End Day</li>
                  <li>Save</li>
                  <li>Load</li>
-                 <li>Funds: {{ funds }}</li>
+                 <li>Funds: ${{ funds }}</li>
                </ul>
             </div>
         </div> 
@@ -46,16 +46,36 @@ export default {
      margin: 0
    }
 
+  html{
+    font-family: 'Nunito', sans-serif;
+  }
+
   ul{
     list-style: none;
     display: flex;
-   
+    align-items: center;
   }
 
   li{
     padding: 10px;
+    color: #f4f4f4;
   }
 
+  a{
+    text-decoration: none;
+    color: #f4f4f4;
+    margin: .5rem;
+  }
+
+  a:focus{
+    outline: none;
+  }
+
+  .active{
+    color: #cf7500;
+    font-weight: bold;
+    
+  }
   .header__start li:first-child{
     text-transform: uppercase;
     font-weight: bold;
@@ -68,7 +88,7 @@ export default {
   .header{
     height: 4rem;
     padding: 5px;
-    background-color: rgb(230, 245, 245);
+    background-color: #000;
     display: flex;
     border-radius: 5px;
     justify-content: space-between;
