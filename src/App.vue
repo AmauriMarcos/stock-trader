@@ -1,32 +1,82 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div>
+     <div class="container">
+        <div class="header">
+            <div class="header__start">
+               <ul>
+                 <li>Stock Trader</li>
+                 <li>Portfolio</li>
+                 <li>Stocks</li>
+               </ul>
+            </div>
+            <div class="header__end">
+              <ul>
+                 <li>End Day</li>
+                 <li>Save</li>
+                 <li>Load</li>
+                 <li>Funds: {{ funds }}</li>
+               </ul>
+            </div>
+        </div> 
+        
+        <div class="content">
+          <router-view></router-view>
+        </div>
+        
+     </div>
+        
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  computed: {
+    funds(){
+       return this.$store.getters.formatNumber;
     }
   }
 }
+</script>
+
+<style lang="scss">
+  *{
+     padding: 0;
+     box-sizing: border-box;
+     margin: 0
+   }
+
+  ul{
+    list-style: none;
+    display: flex;
+   
+  }
+
+  li{
+    padding: 10px;
+  }
+
+  .header__start li:first-child{
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .container{
+     padding: 3% 15%;
+  }
+
+  .header{
+    height: 4rem;
+    padding: 5px;
+    background-color: rgb(230, 245, 245);
+    display: flex;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .content{
+    margin-top: 3rem;
+  }
+  
 </style>
