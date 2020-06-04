@@ -9,8 +9,15 @@
                  <router-link tag='a' to='/stocks' active-class="active">Stocks</router-link>            
                </ul>
             </div>
+<<<<<<< HEAD
             <!-- <p>QTD: BMW({{getQuantity.bmw}})     Google({{getQuantity.google}})
                     Apple({{getQuantity.apple}}) Twitter({{getQuantity.twitter}})</p> -->
+=======
+            <p>QTD BMW ({{getQuantity.bmw}})</p>
+            <p>QTD Google ({{getQuantity.google}})</p>
+            <p>QTD Apple ({{getQuantity.apple}})</p>
+            <p>QTD Twitter ({{getQuantity.twitter}})</p>
+>>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
             <div class="header__end">
               <ul>
                  <li>End Day</li>
@@ -36,10 +43,17 @@ export default {
   computed: {
     funds(){
        return this.$store.getters.formatNumber;
+<<<<<<< HEAD
     }/* ,
     getQuantity(){
       return this.$store.getters.getQuantity;
     } */
+=======
+    },
+    getQuantity(){
+       return this.$store.getters.getQuantity;
+    }
+>>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
   }
 }
 </script>
@@ -50,7 +64,9 @@ export default {
      box-sizing: border-box;
      margin: 0
    }
-
+  p{
+    color: #ccc;
+  }
   html{
     font-family: 'Nunito', sans-serif;
   }
