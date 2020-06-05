@@ -9,13 +9,12 @@
                  <router-link tag='a' to='/stocks' active-class="active">Stocks</router-link>            
                </ul>
             </div>
-            <p>QTD BMW ({{getQuantity.bmw}})</p>
-            <p>QTD Google ({{getQuantity.google}})</p>
-            <p>QTD Apple ({{getQuantity.apple}})</p>
-            <p>QTD Twitter ({{getQuantity.twitter}})</p>
+        
             <div class="header__end">
               <ul>
-                 <li>End Day</li>
+                 <li>
+                   <button class="btn-day" @click="changePrices">End Day</button>
+                 </li>
                  <li>Save</li>
                  <li>Load</li>
                  <li>Funds: ${{ funds }}</li>
@@ -38,9 +37,11 @@ export default {
   computed: {
     funds(){
        return this.$store.getters.formatNumber;
-    },
-    getQuantity(){
-       return this.$store.getters.getQuantity;
+    }
+  },
+  methods:{
+    changePrices(){
+       this.$store.commit('changePrices');
     }
   }
 }
@@ -52,9 +53,7 @@ export default {
      box-sizing: border-box;
      margin: 0
    }
-  p{
-    color: #ccc;
-  }
+
   html{
     font-family: 'Nunito', sans-serif;
   }
@@ -78,6 +77,19 @@ export default {
 
   a:focus{
     outline: none;
+  }
+   
+  .btn-day{
+    border: 1px solid #cf7500 !important ;
+    background-color: #000;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+  }
+
+  .btn-day:hover{
+    color: #cf7500;
+    font-weight: bold;
   }
 
   .active{
