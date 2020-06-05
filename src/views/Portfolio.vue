@@ -1,6 +1,9 @@
 <template>
   <div class="stocks">
-
+     <div class="port_empty" v-if='!getStockQuantity.bmw && !getStockQuantity.google && !getStockQuantity.apple && !getStockQuantity.twitter'>
+        <h2>Your Portfolio is Empty.</h2>
+        <img src="https://i2.wp.com/www.osmelhoresinvestimentos.com.br/wp-content/uploads/2018/07/ESTRAT%C3%89GIA-DE-TOURO-E-URSO-CONHE%C3%87A-ESSA-T%C3%81TICA-PARA-GANHAR-EM-OP%C3%87%C3%95ES-Os-Melhores-Investimentos-Op%C3%A7%C3%B5es-Touro-e-Urso.png?resize=900%2C450&ssl=1" alt="bull & bear">
+     </div>
      <div class="bmw box" v-if='getStockQuantity.bmw'>
        <div class="bar">
           <h3>BMW <span>(Price: {{getPrices.bmw}} | Qtd: {{getStockQuantity.bmw}}) </span></h3>
@@ -9,7 +12,7 @@
           <input type="text" placeholder="Quantity" v-model="quantity.bmw">
           <button @click='sell({current_price: getPrices.bmw, qtd: quantity.bmw, id: 1})'>Sell</button>
        </div>   
-       <p>$ {{quantity.bmw * getPrices.bmw}}</p>
+       <!-- <p>$ {{quantity.bmw * getPrices.bmw}}</p> -->
      </div>
 
      <div class="google box" v-if='getStockQuantity.google'>
@@ -86,6 +89,11 @@ export default {
      outline: none;
    }
 
+  img{
+    width: 100%;
+    height: 500px;
+  }
+
   button{
      padding: .3rem 1rem;
      background-color: rgb(240, 154, 154);
@@ -97,6 +105,13 @@ export default {
 
   span{
     font-size: .8rem;
+  }
+
+  h2{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 200;
+    font-size: 1.6rem;
   }
 
   .stocks{
@@ -113,5 +128,9 @@ export default {
   .bar{
     padding: 7px;
     background-color: #f4f4f4;
+  }
+
+  .port_empty{
+     transform: translateY(-3rem);
   }
 </style>
