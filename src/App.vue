@@ -10,6 +10,7 @@
                </ul>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <!-- <p>QTD: BMW({{getQuantity.bmw}})     Google({{getQuantity.google}})
                     Apple({{getQuantity.apple}}) Twitter({{getQuantity.twitter}})</p> -->
 =======
@@ -18,9 +19,14 @@
             <p>QTD Apple ({{getQuantity.apple}})</p>
             <p>QTD Twitter ({{getQuantity.twitter}})</p>
 >>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
+=======
+        
+>>>>>>> solo
             <div class="header__end">
               <ul>
-                 <li>End Day</li>
+                 <li>
+                   <button class="btn-day" @click="changePrices">End Day</button>
+                 </li>
                  <li>Save</li>
                  <li>Load</li>
                  <li>Funds: ${{ funds }}</li>
@@ -44,6 +50,7 @@ export default {
     funds(){
        return this.$store.getters.formatNumber;
 <<<<<<< HEAD
+<<<<<<< HEAD
     }/* ,
     getQuantity(){
       return this.$store.getters.getQuantity;
@@ -52,6 +59,13 @@ export default {
     },
     getQuantity(){
        return this.$store.getters.getQuantity;
+=======
+    }
+  },
+  methods:{
+    changePrices(){
+       this.$store.commit('changePrices');
+>>>>>>> solo
     }
 >>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
   }
@@ -64,9 +78,7 @@ export default {
      box-sizing: border-box;
      margin: 0
    }
-  p{
-    color: #ccc;
-  }
+
   html{
     font-family: 'Nunito', sans-serif;
   }
@@ -90,6 +102,19 @@ export default {
 
   a:focus{
     outline: none;
+  }
+   
+  .btn-day{
+    border: 1px solid #cf7500 !important ;
+    background-color: #000;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+  }
+
+  .btn-day:hover{
+    color: #cf7500;
+    font-weight: bold;
   }
 
   .active{

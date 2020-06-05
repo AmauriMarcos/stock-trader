@@ -10,8 +10,12 @@
        <button @click="result(bmw)">Buy</button>
 =======
        <input type="text" placeholder="Quantity" v-model="quantity.bmw">
+<<<<<<< HEAD
        <button @click="multiply({price: getPrices.bmw, qtd: quantity.bmw})">Buy</button>
 >>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
+=======
+       <button @click="multiply({price: getPrices.bmw, qtd: quantity.bmw, stock_qtd: 'bmw'})">Buy</button>
+>>>>>>> solo
      </div>
 
      <div class="google box">
@@ -23,8 +27,12 @@
        <button>Buy</button>
 =======
        <input type="text" placeholder="Quantity" v-model="quantity.google">
+<<<<<<< HEAD
        <button @click="multiply({price: getPrices.google, qtd: quantity.google})" >Buy</button>
 >>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
+=======
+       <button @click="multiply({price: getPrices.google, qtd: quantity.google, stock_qtd: 'google'})" >Buy</button>
+>>>>>>> solo
      </div>
 
      <div class="apple box">
@@ -36,8 +44,12 @@
        <button>Buy</button>
 =======
        <input type="text" placeholder="Quantity" v-model="quantity.apple">
+<<<<<<< HEAD
        <button @click="multiply({price: getPrices.apple, qtd: quantity.apple})"  >Buy</button>
 >>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
+=======
+       <button @click="multiply({price: getPrices.apple, qtd: quantity.apple, stock_qtd: 'apple'})"  >Buy</button>
+>>>>>>> solo
      </div>
 
      <div class="twitter box">
@@ -49,8 +61,12 @@
        <button>Buy</button>
 =======
        <input type="text" placeholder="Quantity" v-model="quantity.twitter">
+<<<<<<< HEAD
        <button @click="multiply({price: getPrices.twitter, qtd: quantity.twitter})" >Buy</button>
 >>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
+=======
+       <button @click="multiply({price: getPrices.twitter, qtd: quantity.twitter, stock_qtd: 'twitter'})" >Buy</button>
+>>>>>>> solo
      </div>
   </div>
 </template>
@@ -58,9 +74,14 @@
 <script>
 import { mapFields } from 'vuex-map-fields';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 25f9a8489d2fe8b817ddc760f9d9463e15f6ebf0
+=======
+import { mapGetters} from 'vuex';
+
+>>>>>>> solo
 export default {
    data(){
      return{
@@ -68,6 +89,7 @@ export default {
      }
    },
    computed: {
+<<<<<<< HEAD
      ...mapFields([
        'quantity.bmw',
        'quantity.google',
@@ -88,6 +110,13 @@ export default {
       getQuantity(){
        return this.$store.getters.getQuantity;
     },
+=======
+     ...mapGetters([
+       "getPrices",
+       "getQuantity",
+       "getStockQuantity"
+     ]),
+>>>>>>> solo
      ...mapFields([
       'quantity',
     ]),
