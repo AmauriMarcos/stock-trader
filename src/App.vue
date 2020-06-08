@@ -25,11 +25,12 @@
               </ul>
             </div>
         </div> 
+
         <div class="saved">
-          <svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="512" viewBox="0 0 515.556 515.556" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m0 274.226 176.549 176.886 339.007-338.672-48.67-47.997-290.337 290-128.553-128.552z"/></svg>
-            <!-- <img class='saved__checked' src="../public/img/foursquare-check-in.svg" alt="checked"> -->
-            <p class="saved__success">Successfuly saved!</p>
-        </div>
+          <FlashMessage :position="'left-top'"></FlashMessage>
+        </div>  
+        
+      
         <div class="content">
           <router-view></router-view>
         </div>
@@ -60,6 +61,12 @@ export default {
     },
     saveData(payload){
       this.$store.commit('saveData',payload);
+
+      this.flashMessage.success({
+        message: 'Successfuly saved !',
+        time: 3000
+      });
+
     },
     loadData(){
       this.$store.commit('loadData');
@@ -101,25 +108,12 @@ export default {
   }
 
   .saved{
-    display: flex;
-    background-color: rgb(126, 189, 126);
-    border-radius: 3px;
-    padding: 3px 5px;
-    margin-top: 1rem;
-
-    &__success{
-       color: green;
-    }
-
-    & svg{
-      height: 20px;
-      width: 20px;
-      fill: rgb(82, 179, 82);
-    }
+    margin: 3rem 0;
+    position: absolute;
+    top: -2.5rem;
+    left: 14rem;
   }
 
-
-   
   .btn-day{
     border: 1px solid #cf7500 !important ;
     background-color: #000;
@@ -145,6 +139,7 @@ export default {
 
   .container{
      padding: 3% 15%;
+     position: relative;
   }
 
   .header{
