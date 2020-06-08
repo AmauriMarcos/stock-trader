@@ -18,17 +18,17 @@
                  <li>
                    <button class="btn-day" @click="saveData({prices: getPrices, quantities: getStockQuantity})">Save</button>
                  </li>
-                 <li>Load</li>
+                 <li>
+                   <button class="btn-day" @click="loadData">Load</button>
+                 </li>
                  <li>Funds: ${{ funds }}</li>
               </ul>
             </div>
         </div> 
-        <div>
-          <h2>TEST</h2>
-          <p>{{getSavePrice}}</p>
-          <p>{{getSaveQuantity}}</p>
-          <p>{{getPrices}}</p>
-          <p>{{getStockQuantity}}</p>
+        <div class="saved">
+          <svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="512" viewBox="0 0 515.556 515.556" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m0 274.226 176.549 176.886 339.007-338.672-48.67-47.997-290.337 290-128.553-128.552z"/></svg>
+            <!-- <img class='saved__checked' src="../public/img/foursquare-check-in.svg" alt="checked"> -->
+            <p class="saved__success">Successfuly saved!</p>
         </div>
         <div class="content">
           <router-view></router-view>
@@ -60,6 +60,9 @@ export default {
     },
     saveData(payload){
       this.$store.commit('saveData',payload);
+    },
+    loadData(){
+      this.$store.commit('loadData');
     }
   }
 }
@@ -96,6 +99,26 @@ export default {
   a:focus{
     outline: none;
   }
+
+  .saved{
+    display: flex;
+    background-color: rgb(126, 189, 126);
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin-top: 1rem;
+
+    &__success{
+       color: green;
+    }
+
+    & svg{
+      height: 20px;
+      width: 20px;
+      fill: rgb(82, 179, 82);
+    }
+  }
+
+
    
   .btn-day{
     border: 1px solid #cf7500 !important ;

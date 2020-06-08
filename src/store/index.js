@@ -137,6 +137,19 @@ export const store = new Vuex.Store({
       state.save_price.twitter = payload.prices.twitter
       state.save_quantity.twitter = payload.quantities.twitter;   
 
+    },
+    loadData(state){
+      state.prices.bmw =  state.save_price.bmw;
+      state.quantity.bmw = state.save_quantity.bmw;
+
+      state.prices.google = state.save_price.google;
+      state.quantity.google =  state.save_quantity.google;
+
+      state.prices.apple = state.save_price.apple;
+      state.quantity.apple = state.save_quantity.apple;
+
+      state.prices.twitter = state.save_price.twitter;
+      state.quantity.twitter = state.save_quantity.twitter;
     }
   }
 });
