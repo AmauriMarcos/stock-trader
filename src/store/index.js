@@ -27,6 +27,20 @@ export const store = new Vuex.Store({
         google: 0, 
         apple: 0, 
         twitter: 0
+      },
+      save_price:
+      {
+        bmw: 0,
+        google: 0,
+        apple: 0,
+        twitter: 0
+      },
+      save_quantity:
+      {
+        bmw: 0,
+        google: 0,
+        apple: 0,
+        twitter: 0
       }
    },
    getters: {
@@ -42,6 +56,12 @@ export const store = new Vuex.Store({
      },
      getStockQuantity: state => {
        return state.stock_quantity
+     },
+     getSavePrice: state => {
+       return state.save_price
+     },
+     getSaveQuantity: state => {
+       return state.save_quantity
      }
    },
    mutations: {
@@ -102,7 +122,21 @@ export const store = new Vuex.Store({
           state.stock_quantity.twitter = state.stock_quantity.twitter - payload.qtd
           state.quantity.twitter = ''
         }
-     }
-   }
+     },
+     saveData(state, payload){
   
-})
+      state.save_price.bmw = payload.prices.bmw
+      state.save_quantity.bmw = payload.quantities.bmw;
+
+      state.save_price.google = payload.prices.google
+      state.save_quantity.google = payload.quantities.google;
+
+      state.save_price.apple = payload.prices.apple
+      state.save_quantity.apple = payload.quantities.apple;
+
+      state.save_price.twitter = payload.prices.twitter
+      state.save_quantity.twitter = payload.quantities.twitter;   
+
+    }
+  }
+});

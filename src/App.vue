@@ -15,13 +15,21 @@
                  <li>
                    <button class="btn-day" @click="changePrices">End Day</button>
                  </li>
-                 <li>Save</li>
+                 <li>
+                   <button class="btn-day" @click="saveData({prices: getPrices, quantities: getStockQuantity})">Save</button>
+                 </li>
                  <li>Load</li>
                  <li>Funds: ${{ funds }}</li>
-               </ul>
+              </ul>
             </div>
         </div> 
-        
+        <div>
+          <h2>TEST</h2>
+          <p>{{getSavePrice}}</p>
+          <p>{{getSaveQuantity}}</p>
+          <p>{{getPrices}}</p>
+          <p>{{getStockQuantity}}</p>
+        </div>
         <div class="content">
           <router-view></router-view>
         </div>
@@ -32,16 +40,26 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 
 export default {
   computed: {
-    funds(){
+       funds(){
        return this.$store.getters.formatNumber;
-    }
+    },
+    ...mapGetters([
+       'getSavePrice',
+       'getSaveQuantity',
+       'getPrices',
+       'getStockQuantity'
+    ])
   },
   methods:{
     changePrices(){
        this.$store.commit('changePrices');
+    },
+    saveData(payload){
+      this.$store.commit('saveData',payload);
     }
   }
 }
@@ -94,9 +112,9 @@ export default {
 
   .active{
     color: #cf7500;
-    font-weight: bold;
-    
+    font-weight: bold;  
   }
+
   .header__start li:first-child{
     text-transform: uppercase;
     font-weight: bold;
