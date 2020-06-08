@@ -5,32 +5,50 @@
        <div class="bar">
           <h3>BMW <span>(Price: {{getPrices.bmw}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity" v-model="quantity.bmw">
-       <button @click="multiply({price: getPrices.bmw, qtd: quantity.bmw, stock_qtd: 'bmw'})">Buy</button>
+
+       <div class="itens">
+          <input type="text" placeholder="Quantity" v-model="quantity.bmw">
+          <p>$ {{quantity.bmw * getPrices.bmw}}</p>
+          <button @click="buy({price: getPrices.bmw, qtd: quantity.bmw, stock_qtd: 'bmw'})">Buy</button>
+       </div>
+       
      </div>
 
      <div class="google box">
        <div class="bar">
          <h3>Google <span>(Price: {{getPrices.google}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity" v-model="quantity.google">
-       <button @click="multiply({price: getPrices.google, qtd: quantity.google, stock_qtd: 'google'})" >Buy</button>
+
+       <div class="itens">
+          <input type="text" placeholder="Quantity" v-model="quantity.google">
+          <p>$ {{quantity.google * getPrices.google}}</p>
+          <button @click="buy({price: getPrices.google, qtd: quantity.google, stock_qtd: 'google'})" >Buy</button>
+       </div>
+       
      </div>
 
      <div class="apple box">
        <div class="bar">
          <h3>Apple <span>(Price: {{getPrices.apple}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity" v-model="quantity.apple">
-       <button @click="multiply({price: getPrices.apple, qtd: quantity.apple, stock_qtd: 'apple'})"  >Buy</button>
+       <div class="itens">
+          <input type="text" placeholder="Quantity" v-model="quantity.apple">
+          <p>$ {{quantity.apple * getPrices.apple}}</p>
+          <button @click="buy({price: getPrices.apple, qtd: quantity.apple, stock_qtd: 'apple'})"  >Buy</button>
+       </div>
+       
      </div>
 
      <div class="twitter box">
        <div class="bar">
          <h3>Twitter <span>(Price: {{getPrices.twitter}})</span></h3>
        </div>
-       <input type="text" placeholder="Quantity" v-model="quantity.twitter">
-       <button @click="multiply({price: getPrices.twitter, qtd: quantity.twitter, stock_qtd: 'twitter'})" >Buy</button>
+       <div class="itens">
+          <input type="text" placeholder="Quantity" v-model="quantity.twitter">
+          <p>$ {{quantity.twitter * getPrices.twitter}}</p>
+          <button @click="buy({price: getPrices.twitter, qtd: quantity.twitter, stock_qtd: 'twitter'})" >Buy</button>
+       </div>
+       
      </div>
   </div>
 </template>
@@ -40,6 +58,7 @@ import { mapFields } from 'vuex-map-fields';
 import { mapGetters} from 'vuex';
 
 export default {
+  
    computed: {
      ...mapGetters([
        "getPrices",
@@ -51,8 +70,9 @@ export default {
     ]),
    },
    methods: {
-      multiply(payload){
-          this.$store.commit('multiply', payload);
+      buy(payload){
+          this.$store.commit('buy', payload);
+          
         }
       }
    }
@@ -60,6 +80,10 @@ export default {
 </script>
 
 <style lang="scss">
+.itens{
+  display: flex;
+  align-items: center;
+}
    input{
      
      border-radius: 3px;
@@ -75,6 +99,11 @@ export default {
      color: #f4f4f4;
      border-radius: 3px;
      border: none;
+    
+  }
+
+  .itens button{
+    margin: 0 2rem;
   }
 
   span{

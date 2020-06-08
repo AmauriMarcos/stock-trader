@@ -2,10 +2,15 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { getField, updateField } from "vuex-map-fields";
 
+import FlashMessage from '@smartweb/vue-flash-message';
+
+Vue.use(FlashMessage);
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
    state: {
+      allowed: true,
       funds: 10000,
       prices: 
       { 
@@ -51,6 +56,9 @@ export const store = new Vuex.Store({
      getPrices: state => {
        return state.prices
      },
+     getAllowed: state => {
+       return state.allowed
+     },
      getQuantity: state => {
        return state.quantity
      },
@@ -66,22 +74,32 @@ export const store = new Vuex.Store({
    },
    mutations: {
     updateField,
-     multiply(state, payload){
-        state.funds = state.funds - (payload.price * payload.qtd);
-        
-        if(payload.stock_qtd === 'bmw'){
-          state.stock_quantity.bmw = Number(state.stock_quantity.bmw) + Number(payload.qtd)
-          state.quantity.bmw = ''
-        } else if(payload.stock_qtd === 'google'){
-          state.stock_quantity.google = Number(state.stock_quantity.google) + Number(payload.qtd)
-          state.quantity.google = ''
-        } else if(payload.stock_qtd === 'apple'){
-          state.stock_quantity.apple = Number(state.stock_quantity.apple) + Number(payload.qtd)
-          state.quantity.apple = ''
-        }else {
-          state.stock_quantity.twitter = Number(state.stock_quantity.twitter) + Number(payload.qtd)
-          state.quantity.twitter = ''
+     buy(state, payload){
+       
+
+        if(payload.qtd * payload.price > state.funds){
+            state.allowed = false
+        }else{
+            state.allowed = true
+            state.funds = state.funds - (payload.price * payload.qtd);
+
+          if(payload.stock_qtd === 'bmw'){
+            state.stock_quantity.bmw = Number(state.stock_quantity.bmw) + Number(payload.qtd) 
+            state.quantity.bmw = ''
+            
+          } else if(payload.stock_qtd === 'google'){
+            state.stock_quantity.google = Number(state.stock_quantity.google) + Number(payload.qtd)
+            state.quantity.google = ''
+          } else if(payload.stock_qtd === 'apple'){
+            state.stock_quantity.apple = Number(state.stock_quantity.apple) + Number(payload.qtd)
+            state.quantity.apple = ''
+          }else {
+            state.stock_quantity.twitter = Number(state.stock_quantity.twitter) + Number(payload.qtd)
+            state.quantity.twitter = ''
+          }
         }
+        
+        
 
      },
      
@@ -140,16 +158,18 @@ export const store = new Vuex.Store({
     },
     loadData(state){
       state.prices.bmw =  state.save_price.bmw;
-      state.quantity.bmw = state.save_quantity.bmw;
-
+      state.stock_quantity.bmw = state.save_quantity.bmw;
+   
       state.prices.google = state.save_price.google;
-      state.quantity.google =  state.save_quantity.google;
-
+      state.stock_quantity.google =  state.save_quantity.google;
+      
       state.prices.apple = state.save_price.apple;
       state.quantity.apple = state.save_quantity.apple;
+      state.stock_quantity.apple = ''
 
       state.prices.twitter = state.save_price.twitter;
-      state.quantity.twitter = state.save_quantity.twitter;
+      state.stock_quantity.twitter = state.save_quantity.twitter;
+      
     }
   }
 });

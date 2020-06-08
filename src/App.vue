@@ -2,35 +2,40 @@
   <div>
      <div class="container">
         <div class="header">
-            <div class="header__start">
-               <ul>
-                 <router-link tag='a' to='/' active-class="active" exact="/">Stock Trader</router-link>
-                 <router-link tag='a' to='/portfolio' active-class="active">Portfolio</router-link>
-                 <router-link tag='a' to='/stocks' active-class="active">Stocks</router-link>            
-               </ul>
-            </div>
-        
-            <div class="header__end">
+          <div class="header__start">
               <ul>
-                 <li>
-                   <button class="btn-day" @click="changePrices">End Day</button>
-                 </li>
-                 <li>
-                   <button class="btn-day" @click="saveData({prices: getPrices, quantities: getStockQuantity})">Save</button>
-                 </li>
-                 <li>
-                   <button class="btn-day" @click="loadData">Load</button>
-                 </li>
-                 <li>Funds: ${{ funds }}</li>
+                <router-link tag='a' to='/' active-class="active" exact="/">Stock Trader</router-link>
+                <router-link tag='a' to='/portfolio' active-class="active">Portfolio</router-link>
+                <router-link tag='a' to='/stocks' active-class="active">Stocks</router-link>            
               </ul>
-            </div>
+          </div>
+          
+          <div class="header__end">
+            <ul>
+                <li>
+                  <button class="btn btn-day" @click="changePrices">End Day</button>
+                </li>
+                <li>
+                  <button class="btn btn-save" @click="saveData({prices: getPrices, quantities: getStockQuantity})">Save</button>
+                </li>
+                <li>
+                  <button class="btn btn-load" @click="loadData">Load</button>
+                </li>
+                <li>Funds: ${{ funds }}</li>
+            </ul>
+          </div>
         </div> 
+
+        <div v-if='!allowed'>
+            <div class="warning">
+              <p class="warning__message">You do not have enough money in your funds.</p>
+            </div>
+        </div>
 
         <div class="saved">
           <FlashMessage :position="'left-top'"></FlashMessage>
         </div>  
         
-      
         <div class="content">
           <router-view></router-view>
         </div>
@@ -53,7 +58,10 @@ export default {
        'getSaveQuantity',
        'getPrices',
        'getStockQuantity'
-    ])
+    ]),
+    allowed(){
+       return this.$store.getters.getAllowed;
+    }
   },
   methods:{
     changePrices(){
@@ -76,6 +84,7 @@ export default {
 </script>
 
 <style lang="scss">
+
   *{
      padding: 0;
      box-sizing: border-box;
@@ -93,8 +102,12 @@ export default {
   }
 
   li{
-    padding: 10px;
+    
     color: #f4f4f4;
+  }
+
+  li:last-child{
+    margin-right: 1rem;
   }
 
   a{
@@ -114,17 +127,45 @@ export default {
     left: 14rem;
   }
 
-  .btn-day{
-    border: 1px solid #cf7500 !important ;
+  .warning{
+    padding: 3px 5px;
+    background-color :rgb(240, 130, 130) ;
+    border-radius: 3px;
+    margin-top: 1rem;
+
+    &__message{
+      color: rgb(151, 10, 10);
+      font-weight: bold;
+      padding: .4rem;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      margin: 0;
+    }
+
+  }
+
+  .btn{
     background-color: #000;
     cursor: pointer;
     outline: none;
     font-weight: bold;
+    font-size: .8rem;
+  }
+
+  .btn-day{
+     border: 1px solid #cf7500 !important ;
   }
 
   .btn-day:hover{
     color: #cf7500;
     font-weight: bold;
+  }
+
+  .btn-load:hover,
+  .btn-save:hover {
+    color: #cf7500;
+    
   }
 
   .active{
