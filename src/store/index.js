@@ -12,41 +12,11 @@ export const store = new Vuex.Store({
    state: {
       allowed: true,
       funds: 10000,
-      prices: 
-      { 
-        bmw: 110, 
-        google: 200, 
-        apple: 250, 
-        twitter: 8 
-      },
-      quantity: 
-      {
-        bmw: 0, 
-        google: 0, 
-        apple: 0, 
-        twitter: 0
-      },
-      stock_quantity: 
-      {
-        bmw: 0, 
-        google: 0, 
-        apple: 0, 
-        twitter: 0
-      },
-      save_price:
-      {
-        bmw: 0,
-        google: 0,
-        apple: 0,
-        twitter: 0
-      },
-      save_quantity:
-      {
-        bmw: 0,
-        google: 0,
-        apple: 0,
-        twitter: 0
-      }
+      prices: { bmw: 110, google: 200, apple: 250, twitter: 8 },
+      quantity: {bmw: 0, google: 0, apple: 0, twitter: 0},
+      stock_quantity: {bmw: 0, google: 0, apple: 0, twitter: 0},
+      save_price:{bmw: 0,google: 0,apple: 0,twitter: 0},
+      save_quantity:{bmw: 0,google: 0,apple: 0,twitter: 0}
    },
    getters: {
      getField,
@@ -75,7 +45,6 @@ export const store = new Vuex.Store({
    mutations: {
     updateField,
      buy(state, payload){
-       
 
         if(payload.qtd * payload.price > state.funds){
             state.allowed = false
@@ -98,19 +67,17 @@ export const store = new Vuex.Store({
             state.quantity.twitter = ''
           }
         }
-        
-        
-
      },
      
      changePrices(state){
         const {bmw, google, apple, twitter} = state.prices;
-        let bmw_variation = Math.floor(Math.random() * ((bmw /100) * 40));
-        let google_variation = Math.floor(Math.random() * ((google /100) * 40));
-        let apple_variation = Math.floor(Math.random() * ((apple /100) * 40));
-        let twitter_variation = Math.floor(Math.random() * ((twitter /100) * 40));
+        
+        let bmw_variation = stocksVariation(bmw);
+        let google_variation = stocksVariation(google);
+        let apple_variation = stocksVariation(apple);
+        let twitter_variation = stocksVariation(twitter);
 
-        let coin = Math.random() < 0.6;
+        let coin = Math.random() < 0.5;
 
         if(coin){
           state.prices.bmw = state.prices.bmw + bmw_variation;
@@ -173,3 +140,9 @@ export const store = new Vuex.Store({
     }
   }
 });
+
+
+function stocksVariation(stock){
+  let variation = Math.floor(Math.random() * ((stock /100) * 30));
+  return variation;
+}
